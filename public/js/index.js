@@ -9,7 +9,7 @@ const roomNumber = window.location.href.split('/')[3];
 
 const socket = io();
 
-const baseUrl = "http://192.168.65.126"
+const baseUrl = "wireframes-master.vercel.app"
 const port = 3000
 
 if (document.getElementById('saveUsername')) {
