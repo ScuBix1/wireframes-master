@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wheel</title>
+    <link rel="stylesheet" type="text/css" href="/css/wheel.css">
+</head>
+
+<body>
+    <section>
+        <ul id="players"></ul>
+    </section>
+    <section id="wheelSection">
+        <h1>Choice of topic</h1>
+        <div id="wheelContainer">
+            <div id="arrowResult"></div>
+            <div id="wheel">
+                <div class="topic" data-topic="visual-hierarchy">
+                    <div class="topicTitle"><span>Visual Hierarchy</span></div>
+                </div>
+                <div class="topic" data-topic="interaction-design">
+                    <div class="topicTitle"><span>Interaction Design</span></div>
+                </div>
+                <div class="topic" data-topic="wireframe-fidelity">
+                    <div class="topicTitle"><span>Wireframe fidelity</span></div>
+                </div>
+                <div class="topic" data-topic="accessibility-inclusion">
+                    <div class="topicTitle"><span>Accessibility and inclusion</span></div>
+                </div>
+            </div>
+        </div>
+        <button id="spinButton">Spin the wheel</button>
+    </section>
+    <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+    <script type="text/javascript" src="/js/index.js"></script>
+</body>
+
+</html>
