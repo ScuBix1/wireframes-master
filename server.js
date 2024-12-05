@@ -9,7 +9,7 @@ const apiRoutes = require('./routes/api');
  * @type {Socket}
  */
 const io = require('socket.io')(http);
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 3000;
 
 app.use('/', apiRoutes);
 app.use(express.static('public'));

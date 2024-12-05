@@ -9,7 +9,7 @@ const roomNumber = window.location.href.split('/')[3];
 
 const socket = io();
 
-const baseUrl = 'wireframes-master.vercel.app';
+const baseUrl = 'https://wireframes-master.vercel.app';
 
 if (document.getElementById('saveUsername')) {
   const usernameForm = document.getElementById('saveUsername');
