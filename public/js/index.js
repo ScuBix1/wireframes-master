@@ -9,8 +9,7 @@ const roomNumber = window.location.href.split('/')[3];
 
 const socket = io();
 
-const baseUrl = "wireframes-master.vercel.app"
-const port = 3000
+const baseUrl = 'wireframes-master.vercel.app';
 
 if (document.getElementById('saveUsername')) {
   const usernameForm = document.getElementById('saveUsername');
@@ -26,7 +25,7 @@ if (document.getElementById('saveUsername')) {
         win: false,
       };
       socket.emit('playerData', player, roomNumber);
-      window.location.href = `${baseUrl}:${port}/${roomNumber}/${player.username}/${player.role}`;
+      window.location.href = `${baseUrl}/${roomNumber}/${player.username}/${player.role}`;
     });
   }
 }
@@ -62,7 +61,7 @@ if (document.getElementById('spinButton')) {
       wheel.style.transform = `rotate(${angle}deg)`;
     }
     setTimeout(() => {
-      window.location.href = `${baseUrl}:${port}/${roomNumber}/${player.username}/${player.role}/${choiceTopic}`;
+      window.location.href = `${baseUrl}/${roomNumber}/${player.username}/${player.role}/${choiceTopic}`;
     }, 6500);
   });
 }
@@ -125,11 +124,10 @@ if (document.getElementById('form-container')) {
             window.location.href.split('/')[6],
             checkbox.value
           );
-          
         }
         socket.on('gameMessage', (message) => {
-            alert(message);
-          });
+          alert(message);
+        });
       });
     });
     form.appendChild(submitButton);
