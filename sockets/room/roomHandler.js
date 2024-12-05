@@ -3,7 +3,6 @@ const rooms = {};
 
 module.exports = (io) => {
     io.on('connection', (socket) => {
-        console.log(`Nouvelle connexion : ${socket.id}`);
 
         socket.on('joinRoom', ({ roomId, authorName, role }) => {
             if (!rooms[roomId]) {
@@ -24,7 +23,6 @@ module.exports = (io) => {
 
             socket.join(roomId);
             io.to(roomId).emit('updatePlayers', room.players);
-            console.log(`${authorName} a rejoint la room ${roomId} avec le rôle ${role}`);
 
             if (room.admin === socket.id) {
                 socket.emit('admin', "Vous êtes l'admin de la room.");
@@ -72,7 +70,6 @@ module.exports = (io) => {
                     delete rooms[roomId];
                 }
             }
-            console.log(`Déconnexion : ${socket.id}`);
         });
     });
 };

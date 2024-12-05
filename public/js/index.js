@@ -9,7 +9,7 @@ const roomNumber = window.location.href.split('/')[3];
 
 const socket = io();
 
-const baseUrl = 'https://wireframes-master.vercel.app';
+const baseUrl = 'http://10.26.133.125:3000';
 
 if (document.getElementById('saveUsername')) {
   const usernameForm = document.getElementById('saveUsername');
@@ -82,28 +82,27 @@ if (document.getElementById('form-container')) {
     const form = document.createElement('form');
     form.id = 'quiz-form';
     question.answers.forEach((answer, index) => {
+      const div = document.createElement('div');
       const checkbox = document.createElement('input');
-      checkbox.type = 'checkbox'; // Utilisation de checkbox
-      checkbox.name = 'answer'; // Même nom pour que ce soient des cases à cocher liées
+      checkbox.type = 'checkbox';
+      checkbox.name = 'answer';
       checkbox.value = answer;
-      checkbox.id = `answer${index}`; // Id unique pour chaque case à cocher
+      checkbox.id = `answer${index}`;
 
       const label = document.createElement('label');
-      label.setAttribute('for', checkbox.id); // Lier le label à la checkbox
+      label.setAttribute('for', checkbox.id);
       label.textContent = answer;
 
-      form.appendChild(checkbox);
-      form.appendChild(label);
-      form.appendChild(document.createElement('br'));
+      div.appendChild(checkbox);
+      div.appendChild(label);
+      form.appendChild(div);
 
-      // Ajouter un gestionnaire d'événements pour gérer l'unicité de la sélection
       checkbox.addEventListener('change', (e) => {
         if (e.target.checked) {
-          // Désélectionner toutes les autres cases
           const checkboxes = form.querySelectorAll('input[type="checkbox"]');
           checkboxes.forEach((otherCheckbox) => {
             if (otherCheckbox !== e.target) {
-              otherCheckbox.checked = false; // Désélectionner les autres cases
+              otherCheckbox.checked = false;
             }
           });
         }
@@ -111,26 +110,29 @@ if (document.getElementById('form-container')) {
     });
     const submitButton = document.createElement('button');
     submitButton.type = 'button';
+    submitButton.id = 'submitButton'
     submitButton.textContent = 'Submit';
     submitButton.addEventListener('click', (e) => {
       e.preventDefault();
       const checkboxes = form.querySelectorAll('input[type="checkbox"]');
       checkboxes.forEach((checkbox) => {
         if (checkbox.checked) {
-          console.log(checkbox.value);
           socket.emit(
             'submitAnswer',
             window.location.href.split('/')[4],
             window.location.href.split('/')[6],
-            checkbox.value
+            checkbox.value,
+            roomNumber
           );
         }
-        socket.on('gameMessage', (message) => {
-          alert(message);
-        });
       });
     });
     form.appendChild(submitButton);
     container.appendChild(form);
+    socket.on('gameMessage', (message) => {
+      container.innerHTML = '';
+      container.style.display = 'none';
+      document.getElementById('winner').innerHTML = `<p>${message}</p>`;
+    });
   });
 }
